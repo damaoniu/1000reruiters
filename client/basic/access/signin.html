@@ -1,0 +1,40 @@
+<header ui-include="'client/views/parts/header.html'"></header>
+  <div class="center-block w-xxl w-auto-xs p-y-md m-t-lg">
+    <div class="p-a-md box-color r box-shadow-z1 text-color m-a">
+      <div class="m-b text-sm">
+        Sign in with your {{app.name}} Account
+      </div>
+      <form name="siCt.signinForm" ng-submit="siCt.signin(siCt.signinForm,user)">
+        <div class="md-form-group float-label">
+          <input type="email" class="md-input" ng-model="user.email" required>
+          <label>Email</label>
+        </div>
+        <div class="md-form-group float-label">
+          <input type="password" class="md-input" ng-model="user.password" required>
+          <label>Password</label>
+        </div>
+        <!--<div class="m-b-md">        -->
+          <!--<label class="md-check">-->
+            <!--<input type="checkbox"><i class="primary"></i> Keep me signed in-->
+          <!--</label>-->
+        <!--</div>-->
+        <button type="submit" class="btn primary btn-block p-x-md">Sign in</button>
+      </form>
+      <div class="p-v-lg text-center m-t-xs">
+          <a ng-click="siCt.linkedInSignin()" class="btn btn-icon btn-social rounded btn-social-colored light-blue-800" title="LinkedIn" >
+              <i class="fa fa-linkedin"></i>
+              <i class="fa fa-linkedin"></i>
+          </a>
+          <a ng-click="siCt.googleSignin()" class="btn btn-icon btn-social rounded btn-social-colored red-600" title="Google+" >
+              <i class="fa fa-google-plus"></i>
+              <i class="fa fa-google-plus"></i>
+          </a>
+      </div>
+    </div>
+
+    <div class="p-v-lg text-center">
+      <div class="m-b"><a ui-sref="forgotPass" class="text-primary _600">Forgot password?</a></div>
+      <div>Do not have an account? <a ui-sref="signup" class="text-primary _600">Sign up</a></div>
+    </div>
+  </div>
+<footer class="black pos-rlt" ui-include="'client/views/parts/footer.html'"></footer>

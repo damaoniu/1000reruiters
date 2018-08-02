@@ -1,0 +1,49 @@
+# Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+meteor-base             # Packages every Meteor app needs to have
+mobile-experience       # Packages for a great mobile UX
+mongo                   # The database Meteor supports right now
+session                 # Client-side reactive dictionary for your app
+jquery                  # Helpful client-side library
+tracker                 # Meteor's client-side reactive programming library
+
+standard-minifiers      # JS/CSS minifiers run for production mode
+
+fortawesome:fontawesome
+planettraining:material-design-icons
+angularui:angular-ui-router
+angular
+fourseven:scss
+planettraining:oclazyload
+wylio:mandrill
+mrgalaxy:stripe
+meteorhacks:npm
+
+npm-container
+meteorhacks:ssr
+cfs:standard-packages
+meteorhacks:unblock
+tap:i18n
+gitz:ngfx
+cfs:graphicsmagick
+vitalets:angular-xeditable
+alanning:roles
+aldeed:collection2
+accounts-password
+tmeasday:publish-counts
+meteorhacks:subs-manager
+accounts-google
+jeremy:geocomplete
+tmeasday:presence
+danialfarid:ng-file-upload
+check
+es5-shim
+cfs:s3
+cfs:gridfs
+matb33:collection-hooks
+reywood:publish-composite
+maoniu:s3

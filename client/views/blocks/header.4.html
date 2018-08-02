@@ -1,0 +1,103 @@
+  <div class="navbar">
+        <a data-toggle="collapse" data-target="#navbar-4" class="navbar-item pull-right hidden-md-up m-a-0 m-l">
+          <i class="material-icons">&#xe5d2;</i>
+        </a>
+        <div ui-include="'client/views/blocks/navbar.brand.html'"></div>
+
+        <!-- nabar right -->
+        <ul class="nav navbar-nav nav-active-border b-accent pull-right">
+          <li class="nav-item" ng-if="currentUser.roles.basic=='recruiter'">
+            <a class="nav-link" ui-sref="dashboard.position" ui-sref-active="active" >
+              <span class="btn btn-outline b-accent"><i class="fa fa-plus"></i>&nbsp;{{'addposition'|translate}}</span>
+            </a>
+          </li>
+          <!--<li class="nav-item">-->
+            <!--<a class="nav-link" ui-fullscreen>-->
+              <!--<span><i class="fa fa-fw fa-arrows-v"></i></span>-->
+            <!--</a>-->
+          <!--</li>-->
+            <li class="nav-item">
+            <a class="nav-link"  ui-sref="dashboard.availability" ui-sref-active="active">
+              <span><i class="fa fa-calendar">&nbsp;{{"availability"|translate}}</i></span>
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a href class="nav-link" data-toggle="dropdown">
+              <i class="material-icons">&#xe5c3;</i>
+              <span class="label up p-a-0 accent"></span>
+            </a>
+            <div ui-include="'client/views/blocks/dropdown.grid.html'"></div>
+          </li>
+          <li class="nav-item dropdown">
+            <a href class="nav-link" data-toggle="dropdown">
+              <i class="material-icons">&#xe7f5;</i>
+              <b class="label rounded label-xs success up">5</b>
+            </a>
+            <div ui-include="'client/views/blocks/dropdown.notification.html'"></div>
+          </li>
+          <li class="nav-item dropdown">
+            <a href class="nav-link dropdown-toggle clear" data-toggle="dropdown">
+              <span class="avatar w-32">
+                <img ng-src="{{currentUser.profile.icon}}" alt="...">
+                <i class="busy b-white right"></i>
+              </span>
+              <span>{{currentUser.username}}</span>
+            </a>
+            <div ui-include="'client/views/blocks/dropdown.user.html'"></div>
+          </li>
+        </ul>
+        <!-- / navbar right -->
+
+        <!-- navbar collapse -->
+        <div class="collapse navbar-toggleable-sm" id="navbar-4" data-pjax>
+
+          <div ui-include="'client/views/blocks/navbar.form.right.html'"></div>
+          <!-- link and dropdown -->
+          <ul class="nav navbar-nav pull-left nav-active-border b-{{app.setting.theme.primary}}">
+            <!--<li class="nav-item">-->
+              <!--<a class="nav-link" ui-sref="dashboard.main" ui-sref-active="active">-->
+                <!--<span class="nav-text">Dashboard</span>-->
+              <!--</a>-->
+            <!--</li>-->
+            <li class="nav-item dropdown pos-stc">
+              <a ui-sref="dashboard.positions" ui-sref-active="active" class="nav-link">
+                <span class="nav-text">{{'positions'|translate}}</span>
+              </a>
+            </li>
+            <li class="nav-item" ng-if="isRecruiter()">
+              <a class="nav-link" ui-sref="dashboard.candidates" ui-sref-active="active">
+                <span class="nav-text">{{'candidates'|translate}}</span>
+              </a>
+            </li>
+            <li class="nav-item" ng-if="!isRecruiter()">
+              <a class="nav-link" ui-sref="dashboard.recruiters" ui-sref-active="active">
+                <span class="nav-text">{{'recruiters'|translate}}</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" ui-sref="dashboard.offers" ui-sref-active="active">
+                <span class="nav-text"><i class="fa fa-suitcase"></i>&nbsp;{{'offers'|translate}}</span>
+              </a>
+            </li>
+              <!--move to version 2-->
+            <!--<li class="nav-item">-->
+              <!--<a class="nav-link" ui-sref="dashboard.cycle" ui-sref-active="active">-->
+                <!--<span class="nav-text"><i class="fa fa-cycle"></i>&nbsp;{{'mycycle'|translate}}</span>-->
+              <!--</a>-->
+            <!--</li>-->
+            <!--<li class="nav-item dropdown">-->
+              <!--<a class="nav-link dropdown-toggle" href data-toggle="dropdown">-->
+                <!--<span class="nav-text">{{"ongoings"|translate}}</span>-->
+              <!--</a>-->
+              <!--<div class="dropdown-menu">-->
+                <!--<a  ui-sref="dashboard.inbox" class="dropdown-item"><span class="nav-text">{{'applications'|translate}}</span></a>-->
+                <!--<a class="dropdown-item hide" ui-sref="app.contact" ng-class="{'show': 1}"><span class="nav-text">{{'interviews'|translate}}</span></a>-->
+                <!--<a class="dropdown-item hide" ui-sref="app.calendar" ng-class="{'show': 1}"><span class="nav-text">{{'referals'|translate}}</span></a>-->
+              <!--</div>-->
+            <!--</li>-->
+          </ul>
+          <!-- / link and dropdown -->
+        </div>
+        <!-- / navbar collapse -->
+
+  </div>

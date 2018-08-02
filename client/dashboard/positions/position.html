@@ -1,0 +1,102 @@
+<div class="box">
+        <div class="box-header ">
+            <div class=" nav-active-primary">
+                <ul class="nav nav-tabs pull-right">
+                    <li class="nav-item">
+                        <a class="nav-link active" href data-toggle="tab" data-target="#positionNew">{{"edit"|translate}}&nbsp;<i class="fa fa-plus"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href data-toggle="tab" data-target="#positionView">{{"preview"|translate}}&nbsp;<i class="fa fa-eye"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="tab-content p-a m-b-md">
+                <div class="tab-pane animated fadeIn text-muted " id="positionView">
+                  <h3>  {{poCt.positionEditing.title}}</h3>
+                   <h6>{{'desc'|translate}}</h6>
+                    <div ng-bind-html="poCt.positionEditing.desc"></div>
+                </div>
+                <div class="tab-pane animated fadeIn text-muted active " id="positionNew">
+                    <div class="b-b b-blue nav-active-blue">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" href data-toggle="tab" data-target="#positionNewGeneral">{{"general"|translate}}&nbsp;<i class="fa fa-eye"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href data-toggle="tab" data-target="#positionNewRequirements">{{"requirements"|translate}}&nbsp;<i class="fa fa-check"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href data-toggle="tab" data-target="#positionNewCompany">{{"company"|translate}}&nbsp;<i class="fa fa-building"></i></a>
+                            </li>
+
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="tab-content p-a m-b-md">
+                        <div class="tab-pane animated fadeIn text-muted active" id="positionNewGeneral">
+                            <form name="poCt.newGeneral" class="p-x-xs" ng-submit="poCt.newGeneral.$valid && poCt.savePosition()">
+                                <div class="box">
+                                    <div class="box-header">
+                                        <h2>{{'generalinfo'|translate}}</h2>
+                                    </div>
+                                    <div class="box-body">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 form-control-label">{{'title'|translate}}</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" placeholder="{{'title'|translate}}" ng-model="poCt.positionEditing.title" required >
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 form-control-label">{{'location'|translate}}</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" placeholder="{{'location'|translate}}" ng-model="poCt.positionEditing.location" required >
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 form-control-label">{{'salary'|translate}}</label>
+                                            <div class="col-sm-9">
+                                                <slider
+                                                        ng-model="poCt.positionEditing.salary.min"
+                                                        ng-model-range="poCt.positionEditing.salary.max"
+                                                        floor="1"
+                                                        translate-fn="aCtl.currencyFormatting"
+                                                        ceiling="300">
+                                                </slider>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 form-control-label">{{'desc'|translate}}</label>
+                                            <div class="col-sm-9">
+                                                <summernote ng-model="poCt.positionEditing.desc" height="200"></summernote>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button class="btn btn-outline b-success text-accent">{{'save'|translate}}</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane animated fadeIn text-muted " id="positionNewRequirements">
+                            <h3>{{'requirementText'|translate}}</h3>
+                            <summernote ng-model="poCt.positionEditing.requirementText" height="200"></summernote>
+                            <h3>{{'requirementPoints'|translate}}</h3>
+                            <small-item
+                                    model="poCt.positionEditing.requirements"
+                                    template="client/dashboard/positions/position.requirements.html"
+                                    object="poCt.positionEditing"
+                                    ></small-item>
+
+                        </div>
+                        <div class="tab-pane animated fadeIn text-muted " id="positionNewCompany">
+                            <h6>{{'company'|translate}}</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>

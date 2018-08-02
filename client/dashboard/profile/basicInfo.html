@@ -1,0 +1,67 @@
+<form name="prCt.basic" class="p-x-xs" novalidate ng-submit="prCt.basic.$valid&&saveUser()">
+    <h5>{{'basicinfo'|translate}}</h5>
+    <div class="m-b-lg row">
+        <div class="col-sm-10 col-sm-offset-1">
+            <div class="row row-sm">
+                <div class="col-sm-6">
+                    <div class="md-form-group " ng-class="{'float-label':user.firstName.length<1}">
+                        <input class="md-input" ng-model="user.firstName" required>
+                        <label>{{'firstName'|translate}}</label>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-form-group" ng-class="{'float-label':user.lastName.length<1}">
+                        <input class="md-input" ng-model="user.lastName" required>
+                        <label>{{'lastName'|translate}}</label>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="md-form-group">
+                        <input class="md-input" ng-model="user.address">
+                        <label>{{'address'|translate}}</label>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="md-form-group">
+                        <input class="md-input" ng-model="user.city">
+                        <label>{{'city'|translate}}</label>
+                        <span class="md-input-msg right">30/30</span>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="md-form-group">
+                        <input class="md-input" ng-model="user.state">
+                        <label>{{'state'|translate}}</label>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="md-form-group">
+                        <input class="md-input" ng-model="user.postalCode">
+                        <label>{{'postCode'|translate}}</label>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-form-group">
+                        <input class="md-input" ng-model="user.phone">
+                        <label>{{'phone'|translate}}</label>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="md-form-group">
+                        <input class="md-input" ng-model="user.cell">
+                        <label>{{'cell'|translate}}</label>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="md-form-group">
+                        <textarea class="md-input" ng-model="user.biography" rows="4"></textarea>
+                        <label>{{'biography'|translate}}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-outline b-success text-accent">{{'save'|translate}}</button>
+    </div>
+</form>

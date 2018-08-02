@@ -1,0 +1,92 @@
+<div class="col-sm-12  col-md-8">
+    <div class="box">
+        <div class="box-header">{{"offers"|translate}}</div>
+        <div class="box-body">
+            <div class="b-b b-accent nav-active-accent pull-right">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active text-info" href data-toggle="tab" data-target="#positionsPending">{{"pending"|translate}}&nbsp;<i class="fa fa-hourglass-1"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-success" href data-toggle="tab" data-target="#positionsAccepted">{{"accepted"|translate}}&nbsp;<i class="fa fa-check "></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger" href data-toggle="tab" data-target="#positionsRejected">{{"rejected"|translate}}&nbsp;<i class="fa fa-times "></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="tab-content p-a m-b-md">
+                    <div class="list-group m-b">
+                        <div  class="list-group-item " ng-class="{'b-l-primary':recruiter.online,'b-l-warning':!recruiter.online}" ng-repeat="offer in offers">
+                            <div class="col-sm-3">
+                                <h6>{{offer.title}}</h6>
+                                <p ng-bind-html="offer.desc"></p>
+                                <span class=" fa fa-info-circle">&nbsp;{{"detail"|translate}}</span>
+                            </div>
+                            <div class="col-sm-3">
+                                <h5 class="text-success">{{offer.salary}}</h5>
+                                <p>{{offer.location}}&nbsp;<i class="fa fa-map-marker"></i></p>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="box">
+                                    <div class="box-header">
+                                        <h3>{{offer.candidate.name}}</h3>
+                                    </div>
+                                    <div class="box-tool">
+                                        <span class="w-40 avatar"><img ng-src="{{offer.candidate.icon}}" ><i class=" b-white" ng-class="{away:!position.online,on:position.online}"></i></span>
+                                    </div>
+                                    <div class="box-body">
+                                        <button type="button" class="btn btn-outline b-success text-success"><i class="fa fa-comment"></i>{{'chat'|translate}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <p class="text-accent">{{"deadline"|translate}}: {{offer.deadline}}&nbsp;<i class="fa fa-calendar"></i></p>
+                                <h5>{{'status'|translate}}</h5>
+                                {{offer.status}}
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+</div>
+<div class="col-sm-12 col-md-4">
+    <div class="box">
+        <div class="box-header">{{offerChosen.title}}</div>
+        <div class="box-body">
+            <div class="p-a-md text-center">
+                <a href class="text-md block">{{offerChosen.title}}</a>
+                <p ng-bin-html="offerChosen.desc"></p>
+                <p><small>{{offerChosen.location}}</small>&nbsp;<i class="fa fa-map-marker"></i></p>
+                <p class="m-t-xs text-accent">
+                    {{"deadline"|translate}}: {{offerChosen.deadline}}&nbsp;<i class="fa fa-calendar"></i>
+                </p>
+            </div>
+            <div class="row no-gutter b-t b-b">
+                <a class="p-a block">
+                    <span class="block _600">{{'candidate'|translate}}</span>
+                </a>
+                <div class="box">
+                    <div class="box-header">
+                        <h3>{{offerChosen.candidate.name}}</h3>
+                    </div>
+                    <div class="box-tool">
+                        <span class="w-40 avatar"><img ng-src="{{offerChosen.candidate.icon}}" ><i class=" b-white" ng-class="{away:!position.online,on:position.online}"></i></span>
+                    </div>
+                    <div class="box-body">
+                        <button type="button" class="btn btn-outline b-success text-success"><i class="fa fa-comment"></i>{{'chat'|translate}}</button>
+                    </div>
+                </div>
+            </div>
+            <div class="p-a-md">
+                <h6>{{"benefits"|translate}}</h6>
+                <div ng-bind-html="offerChosen.benefits"></div>
+            </div>
+        </div>
+    </div>
+</div>

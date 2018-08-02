@@ -1,0 +1,27 @@
+<div class="dropdown-menu pull-right dropdown-menu-scale">
+  <a class="dropdown-item" ui-sref="dashboard.inbox.list">
+    <span>Inbox</span>
+    <span class="label warn m-l-xs">3</span>
+  </a>
+  <a class="dropdown-item" ui-sref="dashboard.profile">
+    <span>Profile</span>
+  </a>
+  <a class="dropdown-item" ui-sref="blog">
+    {{"blog"|translate}}
+  </a>
+  <a class="dropdown-item" ui-sref="logout" >Sign out</a>
+  <div class="dropdown-divider"></div>
+  <div class="dropdown-item">
+      <form class=" form-inline pull-none-sm">
+          <div class="form-group ">
+              <label class="col-xs-2 form-control-label">{{"opentonew"|translate}}</label>
+              <div class="col-xs-10">
+                  <label class="ui-switch ui-switch-md info m-t-xs">
+                      <input type="checkbox" checked>
+                      <i></i>
+                  </label>
+              </div>
+          </div>
+      </form>
+  </div>
+</div>

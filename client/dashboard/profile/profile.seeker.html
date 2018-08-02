@@ -1,0 +1,78 @@
+
+        <div class="col-sm-12 col-md-push-2 col-md-8">
+            <div class="box">
+                <div class="box-header">
+                    <h5>{{'profile'|translate}}</h5>
+                </div>
+                <div class="box-body">
+                    <div class="b-b b-accent nav-active-accent pull-right">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" href data-toggle="tab" data-target="#profileBasic">{{"basic"|translate}}&nbsp;</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href data-toggle="tab" data-target="#profileFiles">{{"files"|translate}}&nbsp;<i class="fa fa-file"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href data-toggle="tab" data-target="#profileExperience">{{"workingexperience"|translate}}&nbsp;<i class="fa fa-key"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href data-toggle="tab" data-target="#profileEducation">{{"education"|translate}}&nbsp;<i class="fa fa-sch"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="tab-content p-a m-b-md m-t-lg">
+                        <div class="tab-pane animated fadeIn text-muted active" id="profileBasic">
+                            <h5>{{'photo'|translate}}</h5>
+                            <div class="text-center m-t">
+                                <span class="avatar w-96">
+                                    <!--<cfs-image img-id="user.images.logo[0]" ></cfs-image>-->
+                                    <img ng-src="{{user.images.icon[0].url}}" >
+                                    <i class="on b-white"></i>
+                                </span>
+                               <file-uploader
+                                       pop="true"
+                                       crop="true"
+                                       object="user"
+                                       replace="true"
+                                       model="user.images.icon"
+                                       on-save="saveUser()"
+                                       button-text="{{'upload/change'|translate}}"
+                                       ></file-uploader>
+                            </div>
+                            <div ui-include="'client/dashboard/profile/basicInfo.html'"></div>
+                            <small-item
+                                    template="client/dashboard/profile/profileSkills.html"
+                                    model="skills"
+                                    ></small-item>
+                        </div>
+                        <div class="tab-pane animated fadeIn text-muted" id="profileFiles">
+                            <h5>{{'yourfile'|translate}}</h5>
+                            <div class="box">
+                                <div class="list-group no-radius m-b">
+                                    <div class="list-group-item" ng-repeat="file in user.docs.files">
+                                        {{file.name}}
+                                        <span class="pull-right">
+                                            <a href="{{file.url}}" target="_blank" class="label label-lg accent"><i class="fa fa-link"></i></a>
+                                            <a class="label label-lg accent "><i class="fa fa-file-{{file.type}}-o"></i></a>
+                                            &nbsp;<a class=" label label-lg warn "><i class="fa fa-trash-o"></i></a>
+                                            &nbsp;<a href="{{file.url}}" download class=" label label-lg accent "><i class="fa fa-download"></i></a>
+                                        </span>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h6>{{'upload'|translate}}</h6>
+                            <file-uploader
+                                    model="user.docs.files"
+                                    plain="true"
+                                    multiple="true"
+                                    on-save="saveUser()"
+                                    ></file-uploader>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

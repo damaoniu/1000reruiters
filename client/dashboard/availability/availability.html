@@ -1,0 +1,107 @@
+<div class="padding">
+    <div class="row m-b">
+        <div class="col-md-4">
+            <div class="m-b-sm">
+                <button type="button" class="btn btn-sm primary" data-toggle="modal" data-target="#newEvent" >
+                    <i class="fa fa-plus m-r-xs"></i> Add
+                </button>
+            </div>
+            <!--add new event-->
+            <div class="row-col">
+                <div class="list-group">
+                    <div ng-repeat="e in events" class="list-group-item">
+                        <input ng-model="e.title" class="form-control no-border no-bg p-a-0 text-sm">
+                        <a class="pull-right text-xs" ng-click="remove($index)"><i class="fa fa-trash-o"></i></a>
+                        <div class="text-xs"><span class="w-8 b-a inline rounded m-r-sm {{e.className[0]}}"></span>{{e.start | date:"MMM dd"}} <span ng-show="e.end">-</span> {{e.end | date:"MMM dd"}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class=" text-sm-right">
+                <button type="button" class="btn btn-sm white" ng-click="today()">today</button>
+                <div class="btn-group m-l-xs">
+                    <button class="btn btn-sm white" ng-click="changeView('agendaDay')">Day</button>
+                    <button class="btn btn-sm white" ng-click="changeView('agendaWeek')">Week</button>
+                    <button class="btn btn-sm white" ng-click="changeView('month')">Month</button>
+                </div>
+            </div>
+            <div class="pos-rlt m-t">
+                <div class="fc-overlay">
+                    <div class="panel dark-white b-a pos-rlt">
+                        <span class="arrow b-white"></span>
+                        <div class="h5 _300 m-b-sm b-b p-b-sm">{{event.title}}</div>
+                        <div>
+                            <i class="fa fa-fw fa-calendar-o text-muted m-r-xs"></i> {{event.start | date:'medium'}}
+                        </div>
+                        <div class="ng-hide" ng-show='event.end'>
+                            <i class="fa fa-fw fa-clock-o text-muted m-r-xs"></i> {{event.end | date:'medium'}}
+                        </div>
+                        <div class="ng-hide" ng-show='event.location'>
+                            <i class="fa fa-fw fa-map-marker text-muted m-r-xs"></i> {{event.location}}
+                        </div>
+                        <div class="m-t-sm">{{event.info}}</div>
+                        <div class="m-t-sm">{{event.url}}</div>
+                    </div>
+                </div>
+                <div class="calendar" ng-model="eventSources" config="uiConfig.calendar" ui-calendar="uiConfig.calendar"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade inactive" id="newEvent" data-backdrop="false">
+    <div class="top white b-b">
+        <div class="row-body">
+            <a data-dismiss="modal" class="pull-right text-muted text-lg p-a-sm m-r-sm">&times;</a>
+            <div class="p-a b-b">
+                <strong>{{'addnew'|translate}}</strong>
+            </div>
+            <div class=" dker">
+                <div class="row-body">
+                        <div class="p-a" ng-controller="DatepickerCtrl">
+                            <form name="avCt.addNewEvent" role="form">
+                                <div class="form-group" ng-class="{'has-error': datepickerForm.date.$invalid}">
+                                    <label class=" form-control-label">Date:</label>
+                                    <input type="text" class="form-control"
+                                           ng-model="selectedDate"
+                                           data-icon-left="fa fa-chevron-left"
+                                           data-icon-right="fa fa-chevron-right"
+                                           name="date"
+                                           bs-datepicker>
+                                </div>
+                                <div ng-controller="TimepickerCtrl">
+                                    <div class="form-group" ng-class="{'has-error': timepickerForm.time.$invalid}">
+                                        <label class="form-control-label"><i class="fa fa-clock-o"></i> Time <small>(start)</small></label>
+                                        <input type="text" size="8" class="form-control"
+                                               ng-model="time"
+                                               name="time"
+                                               data-icon-up="fa fa-chevron-up"
+                                               data-icon-down="fa fa-chevron-down"
+                                               bs-timepicker>
+                                    </div>
+                                    <div class="form-group" ng-class="{'has-error': timepickerForm.time.$invalid}">
+                                        <label class="form-control-label"><i class="fa fa-clock-o"></i> Time <small>(end)</small></label>
+                                        <input type="text" size="8" class="form-control"
+                                               ng-model="time"
+                                               name="time"
+                                               data-icon-up="fa fa-chevron-up"
+                                               data-icon-down="fa fa-chevron-down"
+                                               bs-timepicker>
+                                    </div>
+
+                                </div>
+                                <!-- Basic example -->
+                                <div class="form-group">
+                                    <label class="form-control-label">{{'contetn'|translate}}</label>
+                                    <textarea class="form-control" rows="5"></textarea>
+                                </div>
+                                <button class="btn btn-outline b-accent text-accent">{{'save'|translate}}</button>
+
+                            </form>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

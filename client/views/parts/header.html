@@ -1,0 +1,55 @@
+
+    <nav class="navbar navbar-md navbar-fixed-top white">
+        <div class="container">
+            <a data-toggle="collapse" data-target="#navbar-1" class="navbar-item pull-right hidden-md-up m-a-0 m-l">
+                <i class="fa fa-bars"></i>
+            </a>
+
+            <!-- brand -->
+            <a class="navbar-brand md" href="#home" ui-scroll-to="home">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="32" height="32">
+                    <path d="M 0 8 L 48 8 L 48 40 Z" fill="#a88add" />
+                    <path d="M 0 8 L 36 8 L 24 24 Z" fill="rgba(0,0,0,0.15)" />
+                    <path d="M 0 8 L 24 8 L 0  40 Z" fill="#0cc2aa" />
+                </svg>
+                <span class="hidden-folded inline">{{'logo'|translate}}</span>
+            </a>
+            <!-- / brand -->
+
+            <!-- nabar right -->
+            <ul class="nav navbar-nav pull-right" ng-if="currentUser">
+                <li class="nav-item">
+                    <a class="nav-link" ui-sref="dashboard.main" >
+                        <span class="btn btn-sm rounded accent text-u-c _700 fa fa-dashboard">
+                          &nbsp;{{'dashboard'|translate}}
+                        </span>
+                    </a>
+                </li>
+            </ul>
+            <!-- / navbar right -->
+            <!-- navbar collapse -->
+            <div class="collapse navbar-toggleable-sm text-center white" id="navbar-1">
+                <!-- link and dropdown -->
+                <ul class="nav navbar-nav nav-active-border top b-primary pull-right m-r-lg">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features" ui-scroll-to="features" >
+                            <span class="nav-text">Features</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref="signin" ui-sref-active="active">
+                            <span class="nav-text">Signin</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" ui-sref="signup" ui-sref-active="active">
+                            <span class="nav-text">Sign up</span>
+                        </a>
+                    </li>
+                </ul>
+                <!-- / link and dropdown -->
+            </div>
+            <!-- / navbar collapse -->
+        </div>
+    </nav>

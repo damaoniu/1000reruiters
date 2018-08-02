@@ -1,0 +1,183 @@
+<div class="col-sm-12 col-md-push-3 col-md-6">
+    <div class="box">
+        <div class="box-header">{{"positions"|translate}}</div>
+        <div class="box-body">
+            <div class="btn-group pull-right">
+                <button type="button" ng-click="setSection('list')" class="btn btn-outline b-info" ng-class="{active:isSection('list')}">{{"list"|translate}}&nbsp;<i class="fa fa-list"></i></button>
+                <button type="button" ng-click="setSection('map')" class="btn btn-outline b-info ">{{"map"|translate}}&nbsp;<i class="fa fa-map-marker"></i></button>
+            </div>
+
+            <div class=" b-accent nav-active-accent ">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" href data-toggle="tab" data-target="#positionsApplied">{{"Applied"|translate}}&nbsp;<i class="fa fa-file"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href data-toggle="tab" data-target="#positionsInterviewing">{{"interviewing"|translate}}&nbsp;<i class="fa fa-group"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href data-toggle="tab" data-target="#positionsRefered">{{"refered"|translate}}&nbsp;<i class="fa fa-inbox"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href data-toggle="tab" data-target="#positionsRefering">{{"refering"|translate}}&nbsp;<i class="fa fa-send"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+            <div ng-if="isSection('list')" class="m-t-md">
+                <div class="list-group m-b">
+                    <div  class="list-group-item " ng-class="{'b-l-primary':recruiter.online,'b-l-warning':!recruiter.online}" ng-repeat="position in positions">
+                        <div class="col-md-3">
+                            <h6>{{position.title}}</h6>
+                            <p ng-bind-html="position.desc"></p>
+                            <p>{{position.location}}&nbsp;<i class="fa fa-map-marker"></i></p>
+                            <span class="fa fa-info-cycle">{{"detail"|translate}}</span>
+                        </div>
+                        <div class="col-md-3">
+                            <h6>{{'requirements'|translate}}</h6>
+                            <span class="label label-md warn text-info m-r-0" ng-repeat="field in position.fields">{{field}}</span>
+                        </div>
+                        <div class="col-md-3">
+                            <p>{{'recruiter'|translate}}:</p>
+                            <p><span class="w-40 avatar" data-type="info" bs-tooltip data-title="{{position.recruiter.name}}"><img ng-src="{{position.recruiter.icon}}" ><i class=" b-white" ng-class="{away:!position.online,on:position.online}"></i></span></p>
+                                    <span class="btn btn-outline b-accent text-accent">
+                                        <i class="fa fa-comments">&nbsp;{{'Chat'|translate}}</i>
+                                    </span>
+                        </div>
+                        <div class="col-md-3">
+                                    <span class="btn btn-outline b-accent text-accent">
+                                        <i class="fa fa-info">&nbsp;{{'apply'|translate}}</i>
+                                    </span>
+                                    <span class="btn btn-outline b-accent text-accent">
+                                        <i class="fa fa-file-text">&nbsp;{{'note'|translate}}</i>
+                                    </span>
+                                    <span class="btn btn-outline b-accent text-accent">
+                                        <i class="fa fa-send">&nbsp;{{'refer'|translate}}</i>
+                                    </span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="isSection('map')" ng-controller="ChartCtrl" class="m-t-md">
+                <div class="m-b-lg" style="height:240px;" ui-jp="vectorMap" ui-options="{
+                          map: 'world_mill_en',
+                          markers: {{world_markers}},
+                          normalizeFunction: 'polynomial',
+                          backgroundColor: 'transparent',
+                          regionsSelectable: true,
+                          markersSelectable: true,
+                          regionStyle: {
+                            initial: {
+                              fill: '{{app.setting.color.primary}}'
+                            },
+                            hover: {
+                              fill: '{{app.setting.color.accent}}',
+                              stroke: '#fff'
+                            },
+                          },
+                          markerStyle: {
+                            initial: {
+                              fill: '{{app.color.info}}',
+                              stroke: '#fff'
+                            },
+                            hover: {
+                              fill: '{{app.color.primary}}',
+                              stroke: '#fff'
+                            }
+                          },
+                          series: {
+                            markers: [{
+                              attribute: 'fill',
+                              scale: ['{{app.color.primary}}','{{app.color.warning}}', '{{app.color.success}}'],
+                              values: {{cityAreaData}}
+                            },{
+                              attribute: 'r',
+                              scale: [5, 20],
+                              values: {{cityAreaData}}
+                            }]
+                          }
+                        }">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6 col-md-pull-6 col-md-3">
+    <div class="box">
+        <div class="box-header">{{"position"|translate}}</div>
+        <div class="box-body">
+            <p><button class="btn btn-outline b-primary text-primary">{{"my positions"|translate}}</button></p>
+            <h6 class="">{{"search positions"|translate}}</h6>
+            <form class="p-x-xs">
+                <div class="m-b-lg">
+                    <div class=" row-sm">
+                        <div class="col-sm-12">
+                            <div class="md-form-group float-label">
+                                <input class="md-input"  ng-model="search.company">
+                                <label>Company</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="md-form-group float-label">
+                                <input class="md-input" ng-model="search.field" required>
+                                <label>Field</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="md-form-group float-label">
+                                <input class="md-input" ng-model="search.city" required>
+                                <label>City</label>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-outline b-primary text-primary">{{"search"|translate}}&nbsp;<i class="fa fa-search"></i> </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6 col-md-3">
+    <div class="box">
+        <div class="box-header">{{positionChosen.name}}</div>
+        <div class="box-body">
+            <div class="p-a-md text-center">
+                <a href class="text-md block">{{positionChosen.title}}</a>
+                <p ng-bin-html="positionChosen.desc"></p>
+                <p><small>{{positionChosen.location}}</small><i class="fa fa-map-marker"></i></p>
+                <div class="text-center m-t">
+                    <a href class="btn btn-sm rounded btn-outline b-{{app.setting.theme.primary}} w-sm">{{"apply"|translate}}</a>
+                </div>
+            </div>
+            <div class="row no-gutter b-t b-b">
+                <a class="p-a block">
+                    <span class="block _600"> {{'recruiter'|translate}}</span>
+                </a>
+                <div class="box">
+                    <div class="box-header">
+                        <h3>{{positionChosen.recruiter.name}}</h3>
+                    </div>
+                    <div class="box-tool">
+                        <span class="w-40 avatar"><img ng-src="{{positionChosen.recruiter.icon}}" ><i class=" b-white" ng-class="{away:!position.online,on:position.online}"></i></span>
+                    </div>
+                    <div class="box-body" ng-bind-html="positionChosen.recruiter.desc"></div>
+                </div>
+            </div>
+            <div class="p-a">
+                <h3>{{'similarposition'|translate}}</h3>
+                <div class="list-item">
+                    <div class="list-body" ng-repeat="position in positionChosen.recruiter.currentPositions">
+                        <a href class="_500">{{position.title}}</a>
+                        <small class="block text-muted">{{position.shortDesc}}</small>
+                        <button class="btn btn-outline b-primary text-primary btn-xs">{{'apply'|translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

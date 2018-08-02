@@ -1,0 +1,23 @@
+{
+  "googleClientId": "",
+  "googleClientSecret": "",
+  "mandrill": {
+    "user": "",
+    "api_key": ""
+  },
+  "email": {
+    "from": ""
+  },
+  "mailgun": {
+    "ip": "",
+    "smtphost": "",
+    "smtpLogin": "",
+    "api_key": "",
+    "pass": "",
+    "base_url": "g"
+  },
+  "AWS": {
+    "accessKeyId": "",
+    "secretKeyId": ""
+  }
+}

@@ -1,0 +1,9 @@
+<ui-select multiple ng-model="model" theme="bootstrap" >
+    <ui-select-match placeholder="{{placeHolder}}.">
+        <div ui-include="{{matchTemplate}}"></div>
+    </ui-select-match>
+    <ui-select-choices group-by="someGroupFn" repeat="item in items " refresh="refresh($select.search)">
+        <!--the choices can be refreshed using the refresh attribute to attach a function-->
+         <div ui-include="{{choiceTemplate}}"></div>
+    </ui-select-choices>
+</ui-select>

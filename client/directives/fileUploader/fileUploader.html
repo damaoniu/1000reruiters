@@ -1,0 +1,27 @@
+
+<div ng-if="plain" class="margtop20 modal-body" tabindex="-1" role="dialog" >
+    <button class="btn btn-outline rounded b-accent" type="button"  ng-click="showPlain=!showPlain"><i class="fa fa-file"></i>&nbsp;{{buttonText}}</button>
+    <div ng-if="showPlain" class="text-center" >
+        <div ui-include="'client/directives/fileUploader/views/uploadCommon.html'"></div>
+    </div>
+</div>
+
+<div ng-if="pop" class="m-t-lg pop-container">
+    <button class="btn btn-outline  b-accent" type="button" ng-click="openAsModal()"  ><i class="fa fa-file"></i>&nbsp; {{buttonText}}</button>
+    <div class="modal fade inactive pop-modal "  data-backdrop="false" >
+        <div class="modal-dialog box p-a-md">
+            <div class="row-body">
+            <div ui-include="'client/directives/fileUploader/views/uploadCommon.html'"></div>
+             <div class="clearfix"></div>
+            </div>
+            <div class="row-body">
+                <button type="button" class="btn btn-outline rounded b-accent"  data-dismiss="modal"><i class="fa fa-times"></i>&nbsp;Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

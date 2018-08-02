@@ -1,0 +1,124 @@
+<div class="col-sm-12  col-md-4">
+    <div class="box">
+        <div class="box-header">{{"offers"|translate}}</div>
+        <div class="box-body">
+            <div class="btn-group pull-right">
+                <button type="button" ng-click="setSection('list')" class="btn btn-outline b-info" ng-class="{active:isSection('list')}">{{"list"|translate}}&nbsp;<i class="fa fa-list"></i></button>
+                <button type="button" ng-click="setSection('map')" class="btn btn-outline b-info ">{{"map"|translate}}&nbsp;<i class="fa fa-map-marker"></i></button>
+            </div>
+            <div class="clearfix"></div>
+            <div ng-if="isSection('list')" class="m-t-md">
+                <div class="list-group m-b">
+                    <div  class="list-group-item " ng-class="{'b-l-primary':recruiter.online,'b-l-warning':!recruiter.online}" ng-repeat="offer in offers">
+                        <div class="col-sm-4">
+                            <h6>{{offer.title}}</h6>
+                            <p ng-bind-html="offer.desc"></p>
+                            <span class="btn btn-outline fa fa-info">&nbsp;{{"detail"|translate}}</span>
+                        </div>
+                        <div class="col-sm-4">
+                            <h5 class="text-success">{{offer.salary}}</h5>
+                            {{offer.location}}&nbsp;<i class="fa fa-map-marker"></i>
+                        </div>
+                        <!--<div class="col-sm-4">-->
+                        <!--<p>{{'recruiter'|translate}}:</p>-->
+                        <!--<p><span class="w-40 avatar"><img ng-src="{{offer.recruiter.icon}}" ><i class=" b-white" ng-class="{away:!offer.online,on:offer.online}"></i></span></p>-->
+                        <!--<span class="btn btn-outline b-accent text-accent">-->
+                        <!--<i class="fa fa-comments">&nbsp;{{'Chat'|translate}}</i>-->
+                        <!--</span>-->
+                        <!--</div>-->
+                        <div class="col-sm-4">
+                                    <span class="btn btn-outline b-accent text-accent">
+                                        <i class="fa fa-check">&nbsp;{{'accept'|translate}}</i>
+                                    </span>
+                                    <span class="btn btn-outline b-accent text-accent">
+                                        <i class="fa fa-times">&nbsp;{{'reject'|translate}}</i>
+                                    </span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="isSection('map')" ng-controller="ChartCtrl" class="m-t-md">
+                <div class="m-b-lg" style="height:240px;" ui-jp="vectorMap" ui-options="{
+                          map: 'world_mill_en',
+                          markers: {{world_markers}},
+                          normalizeFunction: 'polynomial',
+                          backgroundColor: 'transparent',
+                          regionsSelectable: true,
+                          markersSelectable: true,
+                          regionStyle: {
+                            initial: {
+                              fill: '{{app.setting.color.primary}}'
+                            },
+                            hover: {
+                              fill: '{{app.setting.color.accent}}',
+                              stroke: '#fff'
+                            },
+                          },
+                          markerStyle: {
+                            initial: {
+                              fill: '{{app.color.info}}',
+                              stroke: '#fff'
+                            },
+                            hover: {
+                              fill: '{{app.color.primary}}',
+                              stroke: '#fff'
+                            }
+                          },
+                          series: {
+                            markers: [{
+                              attribute: 'fill',
+                              scale: ['{{app.color.primary}}','{{app.color.warning}}', '{{app.color.success}}'],
+                              values: {{cityAreaData}}
+                            },{
+                              attribute: 'r',
+                              scale: [5, 20],
+                              values: {{cityAreaData}}
+                            }]
+                          }
+                        }">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-sm-12 col-md-8">
+    <div class="box">
+        <div class="box-header">{{offerChosen.title}}</div>
+        <div class="box-body">
+            <div class="p-a-md text-center">
+                <a href class="text-md block">{{offerChosen.title}}</a>
+                <p ng-bin-html="offerChosen.desc"></p>
+                <p><small>{{offerChosen.location}}</small>&nbsp;<i class="fa fa-map-marker"></i></p>
+                <div class="text-center m-t">
+                    <a href class="btn btn-sm rounded btn-outline b-{{app.setting.theme.primary}} w-sm"><i class="fa fa-check"></i>&nbsp;{{"Accept"|translate}}</a>
+                    <a href class="btn btn-sm rounded text-danger btn-outline b-{{app.setting.theme.primary}} w-sm"><i class="fa fa-times"></i>&nbsp;{{"Reject"|translate}}</a>
+                </div>
+                <p class="m-t-xs text-accent">
+                    {{"deadline"|translate}}: {{offerChosen.deadline}}&nbsp;<i class="fa fa-calendar"></i>
+                </p>
+            </div>
+            <div class="row no-gutter b-t b-b">
+                <a class="p-a block">
+                    <span class="block _600">{{'recruiter'|translate}}</span>
+                </a>
+                <div class="box">
+                    <div class="box-header">
+                        <h3>{{offerChosen.recruiter.name}}</h3>
+                    </div>
+                    <div class="box-tool">
+                        <span class="w-40 avatar"><img ng-src="{{offerChosen.recruiter.icon}}" ><i class=" b-white" ng-class="{away:!position.online,on:position.online}"></i></span>
+                    </div>
+                    <div class="box-body">
+                        <button type="button" class="btn btn-outline b-success text-success"><i class="fa fa-comment"></i>{{'chat'|translate}}</button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="p-a-md">
+                <h6>{{"benefits"|translate}}</h6>
+                <div ng-bind-html="offerChosen.benefits"></div>
+            </div>
+        </div>
+    </div>
+</div>

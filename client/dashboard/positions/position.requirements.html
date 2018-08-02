@@ -1,0 +1,55 @@
+<div class="m-t">
+    <h5>{{'requirements'|translate}}</h5>
+    <div>
+        <form id="item-form" ng-submit="addItem()" class="box p-a-sm form-inline" >
+            <div class=" col-md-4">
+                <input placeholder="{{'newRequirements'|translate}}" ng-model="newItem.title"  class="form-control no-border no-bg">
+            </div>
+            <div class=" col-md-4">
+                <label class="fom-control-label">{{'level'|translate}}</label>
+                <p>
+                    <uib-rating class="text-accent" ng-model="newItem.level" max="10" state-on="'fa fa-star'" state-off="'fa fa-star-o'" aria-labelledby="custom-icons-1"></uib-rating>
+                </p>
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-outline btn-sm b-accent">{{"add"|translate}}</button>
+            </div>
+            <div class="clearfix"></div>
+        </form>
+    </div>
+    <div ng-show="model.length">
+        <div class="m-b-md">
+            <div ng-repeat="item in model"  ng-class="{completed: item.completed, editing: item == editedItem}" class="box col-sm-3 p-a m-b-xs">
+                <div ng-hide="item.editedItem">
+                    <div class="dropdown box-tool">
+                        <button md-ink-ripple data-toggle="dropdown" class="md-btn md-flat md-btn-circle">
+                            <i class="material-icons">&#xe5d4;</i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-scale pull-right pull-up">
+                            <a class="dropdown-item" href ng-click='editItem(item)'><i class="fa fa-edit">&nbsp;{{'edit'|translate}}</i></a>
+                            <a class="dropdown-item" href ng-click="removeItem(item)"><i class="fa fa-times">&nbsp;{{'remove'|translate}}</i></a>
+                        </div>
+                    </div>
+                    <span class="clear m-r-lg">{{item.title}}</span>
+                    <span class="clear m-r-lg">{{"level"|translate}}:{{item.level}}</span>
+                </div>
+                <form ng-submit="doneEditing(item)" ng-show="item.editedItem" ng-mouseleave="doneEditing(item)">
+                    <input class="form-control" ng-trim="false" ng-model="item.title" ng-blur="doneEditing(item)" ui-focus="item.editedItem">
+                    <p><uib-rating class="text-accent" ng-model="item.level" max="10" state-on="'fa fa-star'" state-off="'fa fa-star-o'" aria-labelledby="custom-icons-1"></uib-rating></p>
+                </form>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <div ng-hide="model.length">
+        <div class="p-a-lg text-center animated fadeInUp">
+                                            <span class="text-3x">
+                                              <i class="material-icons text-2x text-danger">&#xe877;</i>
+                                            </span>
+            <h4 class="_300 text-muted">
+                {{'addRequirements'|translate}}
+            </h4>
+        </div>
+    </div>
+</div>

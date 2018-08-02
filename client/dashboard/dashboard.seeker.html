@@ -1,0 +1,179 @@
+<div class="col-sm-12 col-md-push-3 col-md-6">
+
+    <div class="box">
+        <form>
+            <textarea class="form-control no-border" rows="3" placeholder="Type something..."></textarea>
+        </form>
+        <div class="box-footer clearfix">
+            <button class="btn btn-info pull-right btn-sm">Post</button>
+            <ul class="nav nav-pills nav-sm">
+                <li class="nav-item"><a class="nav-link" href><i class="fa fa-camera text-muted"></i></a></li>
+                <li class="nav-item"><a class="nav-link" href><i class="fa fa-video-camera text-muted"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="box" ng-controller="ChartCtrl">
+        <div class="box-body p-a-md">
+            <div class="box p-a">
+                <div class="pull-left m-r">
+            <span class="w-40 {{app.setting.theme.accent}} text-center rounded">
+              <i class="fa fa-suitcase"></i>
+            </span>
+                </div>
+                <div class="clear">
+                    <h4 class="m-a-0 text-md"><a href>75 <span class="text-sm">Interviews</span></a></h4>
+                    <small class="text-muted">6 waiting to see you.</small>
+                </div>
+            </div>
+        </div>
+        <div class="box-header">
+            <h3>Easypie</h3>
+            <small>Options</small>
+        </div>
+        <div class="box-body text-center">
+            <div class="row-col ">
+                <div class="row-cell">
+                    <div class="inline">
+                        <div ui-jp="easyPieChart" class="easyPieChart" ui-refresh="app.setting.color" data-redraw='true' data-percent="75" ui-options="{
+                          percent: 75,
+                          lineWidth: 5,
+                          trackColor: 'rgba(0,0,0,0.05)',
+                          barColor: '{{app.setting.color.primary}}',
+                          scaleColor: 'transparent',
+                          size: 75,
+                          scaleLength: 0,
+                          lineCap: 'butt',
+                          animate:{
+                            duration:0,
+                            enabled:false
+                          }
+                        }">
+                            <div>
+                                75%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-cell">
+                    <div class="inline">
+                        <div ui-jp="easyPieChart" class="easyPieChart" ui-refresh="app.setting.color" data-redraw='true' data-percent="45" ui-options="{
+                          percent: 45,
+                          lineWidth: 5,
+                          trackColor: 'rgba(0,0,0,0.05)',
+                          barColor: '{{app.setting.color.warn}}',
+                          scaleColor: 'transparent',
+                          size: 75,
+                          scaleLength: 0,
+                          lineCap: 'butt',
+                          animate:{
+                            duration:0,
+                            enabled:false
+                          }
+                        }">
+                            <div>
+                                45%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box">`
+        <div class="box-header">
+            <h3>Feeds <span class="label success">5</span></h3>
+        </div>
+        <div class="box-body">
+            <div class="streamline b-l m-l-md" >
+
+                <div class="sl-item" ng-repeat="feed in feeds">
+                    <div class="sl-left">
+                        <img ng-src="{{feed.author.icon}}" class="img-circle" >
+                    </div>
+                    <div class="sl-content">
+                        <div class="sl-date text-muted">{{feed.time}}</div>
+                        <div class="sl-author">
+                            <a href>{{feed.author.name}}</a>
+                        </div>
+                        <blockquote ng-bind-html="feed.content">
+                        </blockquote>
+                        <div class="sl-item" ng-repeat="reply in feed.replies">
+                            <div class="sl-left">
+                                <img ng-src="{{reply.icon}}" class="img-circle">
+                            </div>
+                            <div class="sl-content">
+                                <div class="sl-date text-muted">{{reply.time}}</div>
+                                <div ng-bind-html="reply.content"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6 col-md-pull-6 col-md-3">
+    <div class="box">
+        <div class="box-tool">
+            <ul class="nav">
+                <li class="nav-item inline">
+                    <a class="nav-link">
+                        <i class="material-icons md-18">&#xe863;</i>
+                    </a>
+                </li>
+                <li class="nav-item inline dropdown">
+                    <a class="nav-link text-muted" data-toggle="dropdown">
+                        <i class="material-icons md-18">&#xe164;</i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-scale pull-right dark">
+                        <a class="dropdown-item" href>Positions</a>
+                        <a class="dropdown-item" href>Feeds</a>
+                        <a class="dropdown-item" href>Profile</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item">Connect</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="p-a-md text-center">
+            <p><img ng-src="{{suggestedConnect.icon}}" class="img-circle w-xs"></p>
+            <a href class="text-md block">{{suggestedConnect.name}}</a>
+            <p><small>{{suggestedConnect.place}}</small></p>
+            <div class="text-center m-t">
+                <a href class="btn btn-sm rounded btn-outline b-{{app.setting.theme.primary}} w-sm">{{"connect"|translate}}</a>
+            </div>
+        </div>
+        <div class="row no-gutter b-t b-b">
+            <a class="p-a block text-center">
+                <span class="block _600">{{suggestedConnect.positionsNumber}}</span>
+                <span>Positons</span>
+            </a>
+        </div>
+        <div class="p-a">
+            <a href class="text-ellipsis"><i class="fa fa-link text-muted m-r-sm"></i> {{suggestedConnect.link}}</a>
+        </div>
+    </div>
+
+</div>
+
+<div class="col-sm-6 col-md-3">
+    <div class="box">
+        <div class="box-header">
+            <h4>Just followed you</h4>
+        </div>
+        <div class="list-group no-radius no-borders">
+            <a data-toggle="modal"  ng-repeat="follower in recentFollowers" data-target="#chat" data-dismiss="modal"  class="list-group-item text-ellipsis">
+                <span class="w-8 rounded m-r-sm success" ng-if="follower.status=='online'" ></span>
+                <span class="w-8 rounded m-r-sm warning" ng-if="follower.status=='away'"></span>
+                <span class="w-8 rounded m-r-sm dker" ng-if="follower.status=='offline'"></span>
+                <img ng-src="{{follower.icon}}" class="w-24 m-r-sm img-circle">
+                <span>{{follower.name}}</span>
+            </a>
+
+        </div>
+    </div>
+    <div class="box light lt p-a-lg text-center">
+        AD
+    </div>
+</div>

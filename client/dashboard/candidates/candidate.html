@@ -1,0 +1,52 @@
+<div class="col-sm-6 col-md-3">
+    <div class="box">
+        <div class="box-header">{{candidateChosen.name}}</div>
+        <div class="box-body">
+
+            <div class="p-a-md text-center">
+                <p><img ng-src="{{candidateChosen.icon}}" class="img-circle w-xs"></p>
+                <a href class="text-md block">{{candidateChosen.name}}</a>
+                <p><small>{{candidateChosen.place}}</small></p>
+                <div class="text-center m-t">
+                    <a href class="btn btn-sm rounded btn-outline b-{{app.setting.theme.primary}} w-sm">{{"connect"|translate}}</a>
+                </div>
+            </div>
+            <div class="row no-gutter b-t b-b">
+                <a class=" block">
+                    <span class="block _600">{{candidateChosen.currentPositions.length}} {{'positions'|translate}}</span>
+                </a>
+                <button class="btn-sm btn-outline text-accent"><i class="fa fa-plus">&nbsp;{{'addjob'|translate}}</i></button>
+                <!--TODO MOVE INTO A SERVICE OR DIRECTIVE-->
+                <!--<div class="form-group " ng-controller="SelectCtrl">-->
+                <!--<label class="col-sm-3 form-control-label"> <i class="fa fa-plus"></i>&nbsp; {{'add a new job'|translate}}</label>-->
+                <!--<div class="col-sm-6">-->
+
+                <!--<ui-select ng-model="positions.selected"-->
+                <!--theme="bootstrap"-->
+                <!--ng-disabled="disabled"-->
+                <!--reset-search-input="false"-->
+                <!--style="width: 300px;">-->
+                <!--<ui-select-match placeholder="Enter an address...">{{$select.selected.formatted_address}}</ui-select-match>-->
+                <!--<ui-select-choices repeat="address in addresses track by $index"-->
+                <!--refresh="refreshAddresses($select.search)"-->
+                <!--refresh-delay="0">-->
+                <!--<div ng-bind-html="address.formatted_address | highlight: $select.search"></div>-->
+                <!--</ui-select-choices>-->
+                <!--</ui-select>-->
+                <!--<span class="help-block">{{address.selected.formatted_address}}</span>-->
+                <!--</div>-->
+                <!--<div class="clearfix"></div>-->
+                <!--</div>-->
+                <div class="list-item"  ng-repeat="position in candidateChosen.currentPositions">
+                    <div class="list-body">
+                        <a href class="_500">{{position.title}}</a>
+                        <small class="block text-muted">{{position.shortDesc}}</small>
+                    </div>
+                </div>
+            </div>
+            <div class="p-a">
+                <a href class="text-ellipsis"><i class="fa fa-link text-muted m-r-sm"></i> {{candidateChosen.link}}</a>
+            </div>
+        </div>
+    </div>
+</div>

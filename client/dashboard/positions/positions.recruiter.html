@@ -1,0 +1,108 @@
+<div class="container">
+    <div class="box">
+        <div class="box-header"><h3>{{'mypositions'|translate}}</h3></div>
+
+        <div class="box-body">
+            <div class="m-t-xs">
+                <div class="btn-group m-b-lg m-t" ng-show="psCt.positionsChosen.length>0">
+                    <a href ng-click="psCt.removePosition()" class="btn btn-sm btn-outline danger text-accent">
+                        <i class="fa fa-trash">&nbsp;{{'remove'|translate}}</i>
+                    </a>
+                </div>
+                <div>
+                    <label>{{'sort'|translate}}:&nbsp;</label>
+                    <button type="button" class="btn white"
+                            ng-model="psCt.sort" data-html="1"
+                            placeholder=" "
+                            data-animation="am-flip-x"
+                            bs-options="sort.value as sort.translate for sort in psCt.sorts"
+                            bs-select><span class="fa fa-filter"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="b-b b-accent m-t nav-active-accent">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" href data-toggle="tab" data-target="#positionsNew">{{"new"|translate}}&nbsp;</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href data-toggle="tab" data-target="#positionsInterviewing">{{"interviewing"|translate}}&nbsp;</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href data-toggle="tab" data-target="#positionsOffered">{{"offered"|translate}}&nbsp;<i class="fa fa-inbox"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href data-toggle="tab" data-target="#positionsClosed">{{"closed"|translate}}&nbsp;<i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="list-group m-t">
+                <div  class="list-group-item accent">
+                    <div class="col-md-1">
+                        {{'select'|translate}}
+                    </div>
+                    <div class="col-md-2">
+                       {{'title'|translate}}
+                    </div>
+                    <div class="col-md-3">
+                        {{'requirements'|translate}}
+                    </div>
+                    <div class="col-md-3">
+                        {{'candidates'|translate}}
+                    </div>
+                    <div class="col-md-1 ">
+                        {{'actions'|translate}}
+                    </div>
+                    <div class="col-md-1">
+                        {{'date'|translate}}
+                    </div>
+                    <div class="col-md-1">
+                        {{'status'|translate}}
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div  class="list-group-item " ng-class="{'b-l-primary':recruiter.online,'b-l-warning':!recruiter.online}" dir-paginate="position in psCt.positions|itemsPerPage:10">
+                    <div class="col-md-1">
+                        <label class="md-check v-m">
+                            <input type="checkbox" ui-event="{change:'psCt.select($event,position._id)'}">
+                            <i class="green"></i>
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        <h6>{{position.title}}</h6>
+                        <b class="text-accent">{{position.salary.min}}-{{position.salary.max}}k/{{'year'|translate}}</b>
+                        <p><a href="http://www.google.com/maps/place/{{position.location}}" target="_blank">{{position.location}}&nbsp;<i class="fa fa-map-marker"></i></a></p>
+
+
+                    </div>
+                    <div class="col-md-3">
+                        <span bs-tooltip data-type="info" data-title="{{req.level}}" class="label label-md warn text-info m-r-0" ng-repeat="req in position.requirements">{{req.title}}</span>
+                    </div>
+                    <div class="col-md-3">
+                        <p><span class="text-accent"><i class="fa fa-plus-circle"></i></span></p>
+                        <span class="w-40 avatar" bs-tooltip data-type="info"  data-title="{{candidate.name}}" ng-repeat="candidate in position.candidates"><img ng-src="{{candidate.icon}}" ><i class=" b-white" ng-class="{away:!candidate.online,on:candidate.online}"></i></span>
+                    </div>
+                    <div class="col-md-1 text-accent">
+                        <span class="fa fa-file-text ">&nbsp;{{'note'|translate}}</span>
+                        <span class="fa fa-share">&nbsp;{{'share'|translate}}</span>
+                        <a href="dashboard/position/{{position._id}}" class="text-accent">
+                            <span class="fa fa-edit">&nbsp;{{'edit'|translate}}</span>
+                        </a>
+                    </div>
+                    <div class="col-md-1">
+                        <p class="text-accent"> <b>{{position.createdAt|date:'YYYY-MM-DD'}}</b></p>
+                    </div>
+                    <div class="col-md-1">
+                        {{position.status}}
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="text-center">
+                    <dir-pagination-controls></dir-pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

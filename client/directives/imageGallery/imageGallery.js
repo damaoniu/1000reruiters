@@ -1,0 +1,13 @@
+angular.module("hunters").directive('imageGallery',[function(){
+    return{
+        restrict:"E",
+        templateUrl:'client/directives/imageGallery/imageGallery.ng.html',
+        scope:{
+            imageArray:"=",
+            array:'@',
+            parent:'@',
+            onChange:"&"
+        },
+        controller:'ImageGalleryCtrl'
+    };
+}]);

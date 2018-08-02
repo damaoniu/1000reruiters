@@ -1,0 +1,153 @@
+<div class="padding">
+    <div class="row">
+        <div class="col-sm-12 col-md-push-3 col-md-6">
+            <div class="box">
+                <div class="box-header">{{"recuiters"|translate}}</div>
+                <div class="box-body">
+                    <div class="btn-group pull-right">
+                        <button type="button" ng-click="resCt.setSection('list')" class="btn btn-outline b-info" ng-class="{active:isSection('list')}">{{"list"|translate}}&nbsp;<i class="fa fa-list"></i></button>
+                        <button type="button" ng-click="resCt.setSection('map')" class="btn btn-outline b-info ">{{"map"|translate}}&nbsp;<i class="fa fa-map-marker"></i></button>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div ng-if="resCt.isSection('list')" class="m-t-md">
+                        <div class="list-group m-b">
+                            <div  class="list-group-item " ng-class="{'b-l-primary':recruiter.online,'b-l-warning':!recruiter.online}" dir-paginate="recruiter in resCt.recruiters|itemsPerPage:10">
+                                <div class="col-md-3">
+                                    <p><span class="w-40 avatar"><img ng-src="{{recruiter.profile.images.icon[0].url}}" ><i class=" b-white" ng-class="{away:!recruiter.online,on:recruiter.online}"></i></span></p>
+                                  {{recruiter.profile.desc}}
+                                </div>
+                                <div class="col-md-3">
+                                    <h6>{{'recruitingin'|translate}}</h6>
+                                    <span class="label label-md warn text-info" ng-repeat="field in recruiter.profile.fields">{{field}}</span>
+                                </div>
+                                <div class="col-md-3">
+                                    <p>{{'staffed'|translate}}:<span class="label danger">{{recruiter.profile.staffed}}</span></p>
+                                    <p>{{'currentpositions'|translate}}:<span class="label danger">{{recruiter.profile.currentPositions.length}}</span></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <span class="fa fa-comments text-accent">&nbsp;{{'Chat'|translate}}</span>
+                                    <span class="fa fa-info text-success">&nbsp;{{'profile'|translate}}</span>
+                                    <span class="fa fa-heart text-danger">&nbsp;{{'connect'|translate}}</span>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="resCt.isSection('map')" ng-controller="ChartCtrl" class="m-t-md">
+                        <div class="m-b-lg" style="height:240px;" ui-jp="vectorMap" ui-options="{
+                          map: 'world_mill_en',
+                          markers: {{world_markers}},
+                          normalizeFunction: 'polynomial',
+                          backgroundColor: 'transparent',
+                          regionsSelectable: true,
+                          markersSelectable: true,
+                          regionStyle: {
+                            initial: {
+                              fill: '{{app.setting.color.primary}}'
+                            },
+                            hover: {
+                              fill: '{{app.setting.color.accent}}',
+                              stroke: '#fff'
+                            },
+                          },
+                          markerStyle: {
+                            initial: {
+                              fill: '{{app.color.info}}',
+                              stroke: '#fff'
+                            },
+                            hover: {
+                              fill: '{{app.color.primary}}',
+                              stroke: '#fff'
+                            }
+                          },
+                          series: {
+                            markers: [{
+                              attribute: 'fill',
+                              scale: ['{{app.color.primary}}','{{app.color.warning}}', '{{app.color.success}}'],
+                              values: {{cityAreaData}}
+                            },{
+                              attribute: 'r',
+                              scale: [5, 20],
+                              values: {{cityAreaData}}
+                            }]
+                          }
+                        }">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-pull-6 col-md-3">
+            <div class="box">
+                <div class="box-header">{{"reuiters"|translate}}</div>
+                <div class="box-body">
+                    <p><label class="md-switch">
+                        <input ng-model="resCt.search.onlyMy"  type="checkbox">
+                        <i class="info"></i>
+                        <b class="text-accent text-lg ">{{"mycandidates"|translate}}</b>
+                    </label></p>
+                    <h6 class="">{{"search recruiters"|translate}}</h6>
+                    <form class="p-x-xs" ng-submit="resCt.searchRecruiters()">
+                        <div class="m-b-lg">
+                            <div class=" row-sm">
+                                <div class="col-sm-12">
+                                    <div class="md-form-group float-label">
+                                        <input class="md-input"  ng-model="resCt.search.company">
+                                        <label>Company</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="md-form-group float-label">
+                                        <input class="md-input" ng-model="resCt.search.fields" >
+                                        <label>Field</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="md-form-group float-label">
+                                        <input class="md-input" ng-model="resCt.search.city" >
+                                        <label>City</label>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button class="btn btn-outline b-primary text-primary">{{"search"|translate}}&nbsp;<i class="fa fa-search"></i> </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-3">
+            <div class="box">
+                <div class="box-header">{{recruiterChosen.name}}</div>
+                <div class="box-body">
+                    <div class="p-a-md text-center">
+                        <p><img ng-src="{{recruiterChosen.icon}}" class="img-circle w-xs"></p>
+                        <a href class="text-md block">{{recruiterChosen.name}}</a>
+                        <p><small>{{recruiterChosen.place}}</small></p>
+                        <div class="text-center m-t">
+                            <a href class="btn btn-sm rounded btn-outline b-{{app.setting.theme.primary}} w-sm">{{"connect"|translate}}</a>
+                        </div>
+                    </div>
+                    <div class="row no-gutter b-t b-b">
+                        <a class="p-a block">
+                            <span class="block _600">{{recruiterChosen.currentPositions.length}} {{'positions'|translate}}</span>
+                        </a>
+                        <div class="list-item">
+                            <div class="list-body" ng-repeat="position in recruiterChosen.currentPositions">
+                                <a href class="_500">{{position.title}}</a>
+                                <small class="block text-muted">{{position.shortDesc}}</small>
+                                <button class="btn btn-outline b-primary text-primary btn-xs">{{'apply'|translate}}</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-a">
+                        <a href class="text-ellipsis"><i class="fa fa-link text-muted m-r-sm"></i> {{recruiterChosen.link}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<!-- views/loginModalTemplate.html -->
+<div class="box p-a-lg">
+    <div class="text-center" ui-include="'client/views/blocks/navbar.brand.html'"></div>
+    <form name="lmCt.form" novalidate class="form-horizontal p-a-lg" ng-submit="lmCt.form.$valid && submit()" >
+
+
+        <h3 class="text-accent">page.sign-in-s</h3>
+        <ul ng-if="error">
+            <li class="font_pink alert-warning">{{error}}</li>
+        </ul>
+        <div class="form-group">
+            <label  class="col-sm-3">plain.email</label>
+            <div class="col-sm-9">
+                <input type="email" name="email" ng-model="lg.email" class="form-control " placeholder="plain.enter-email"  required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3">plain.password</label>
+            <div class="col-sm-9">
+                <input type="password" name="password" ng-model="lg.password" class="form-control"  required>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="form-group">
+            <div class="col-sm-9 col-sm-offset-3 text-right">
+                <div class="text-center">
+                    <button type="submit" class="btn btn-outline b-accent">plain.submit</button>
+                </div>
+                <div class="">
+                    <a ui-sref="forgotPass" >plain.forget-pass</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

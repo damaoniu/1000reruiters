@@ -1,0 +1,49 @@
+<div ng-hide="imgSrc" ngf-drop ngf-select
+     ngf-change="addImages($files)"
+     ngf-drag-over-class="{pattern:pattern, accept:'b-success', reject:'b-danger', delay:100}" class="m-t b-a b-info b-2x b-dashed p-a-md text-center m-b"
+     ngf-multiple="{{multiple}}" ngf-allow-dir="false" ngf-accept="{{pattern}}"
+     ngf-drop-available="dropAvailable">
+    <spn class="text-accent text-lg"><i class="fa fa-file-image-o">&nbsp;{{buttonText}}</i></spn>
+</div>
+<div ng-if="!crop" class="table-responsive">
+    <div ng-if="newItems.length>0">
+        <table class="table table-hover">
+            <tbody>
+            <tr ng-repeat="file in newItems">
+                <td >
+                    <img ng-src="{{newImages[file.name]}}" with="30" height="30"  ngf-resize="{width: 20, height: 20, quality: 0.9}"/>
+                </td>
+                <td>{{file.name}}</td>
+                <td ><span class=" text-2x text-success fa fa-spinner" ng-if="file.uploading"></span><span class=" text-2x text-success fa fa-check" ng-if="file.uploaded"></span></td>
+                <td>
+                    <button  class="btn success btn-sm" type="button" ng-click="save(file)"><i class="fa fa-upload">&nbsp;Save</i></button>
+                    <button  class="btn danger btn-sm" type="button" ng-click="remove(file)"><i class="fa fa-trash">&nbsp;Remove</i></button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div ng-if="newItems.length>1">
+            <button class="btn btn-outline rounded b-accent" type="button" ng-click="saveAll()">Save All</button>
+            <button class="btn btn-outline rounded b-accent" type="button" ng-click="removeAll()">Remove All</button>
+        </div>
+    </div>
+</div>
+<div ng-show="crop" class="">
+    <div ng-show="imgSrc" class="ng-crop-container text-center p-a-md" >
+        <h5>Crop & Edit</h5>
+        <!--must have a predefinded size-->
+        <!--crop is not functioning properly om the  pop up-->
+        <div class="cropArea">
+            <img-crop image="imgSrc" result-image="myCroppedImage" on-change="saveCropped($dataURI)" area-type="square"></img-crop>
+        </div>
+
+        <!--<img ng-src="{{imgSrc}}" width="150" height="150"/>-->
+        <div class="clearfix"></div>
+        <div class="text-center m-t">
+            <button type="button" class="btn btn-sm success" ng-click="saveSingleImage()">Use this</button>
+            <button type="button" class="btn btn-sm danger" ng-click="cancel()">Cancel</button>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<div class="clearfix"></div>

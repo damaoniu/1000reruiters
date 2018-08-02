@@ -1,0 +1,9 @@
+<div class="row" ng-if="imageArray.length>0">
+    <div class="col-md-3" ng-repeat="image in imageArray">
+        <img ng-src="{{getImageUrl(image)}}"  width="100" height="100">
+        <div class="caption">
+            <i class="fa fa-trash-o  fx-fade-up"  ng-click="remove(image)"></i>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>

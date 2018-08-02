@@ -1,0 +1,185 @@
+<div class="padding">
+    <div class="row">
+        <div class="col-sm-12 col-md-push-3 col-md-9">
+            <div class="box">
+                <div class="box-header">{{"candidates"|translate}}</div>
+                <div class="box-body">
+                    <div class="nav-active-info pull-right">
+                        <ul class="nav nav-tabs m-t">
+                            <li class="nav-item">
+                                <a class="nav-link active" href data-toggle="tab" data-target="#candidatesList" >{{"list"|translate}}&nbsp;<i class="fa fa-list"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href data-toggle="tab" data-target="#candidatesMap">{{"map"|translate}}&nbsp;<i class="fa fa-map-marker"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="tab-content p-a m-b-md">
+                        <div class="tab-pane animated fadeIn text-muted active " id="candidatesList">
+                            <div class="m-t-md">
+                                <div class="list-group m-b">
+                                    <div  class="list-group-item " ng-class="{'b-l-primary':candidate.online,'b-l-warning':!candidate.online}" dir-paginate="candidate in caCt.candidates|itemsPerPage:caCt.perPage">
+                                        <div class="col-md-2">
+                                            <p><span class="w-40 avatar"><img ng-src="{{candidate.profile.images.icon[0].url}}" ><i class=" b-white" ng-class="{away:!candidate.online,on:candidate.online}"></i></span></p>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <h6>{{candidate.profile.firstName +" "+candidate.profile.lastName}}</h6>
+
+                                            {{candidate.desc}}
+                                            <a href="http://maps.google.com/places/{{candidate.profile.city+' '+ candidate.profile.country}}" target="_blank"><i class="fa fa-map-marker"></i>:{{candidate.profile.city+" "+ candidate.profile.country}}</a>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <h6>{{'skills'|translate}}</h6>
+                                            <span class="label label-md warn text-info" bs-tooltip data-title="{{field.level}}" ng-repeat="field in candidate.profile.skills">{{field}}</span>
+                                        </div>
+                                        <div class="col-md-2 ">
+                                            <span class="fa fa-calendar-o">&nbsp;{{'interview'|translate}}</span>
+                                            <span class="fa fa-suitcase">&nbsp;{{'offer'|translate}}</span>
+                                            <span class="fa fa-mobile">&nbsp;{{'cell'|translate}}</span>
+                                            <span class="fa fa-envelope-square">&nbsp;{{'mail'|translate}}</span>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <span class="fa fa-comments text-accent">&nbsp;{{'Chat'|translate}}</span>
+                                            <span class="fa fa-file text-accent">&nbsp;{{'resume'|translate}}</span>
+                                            <span class="fa fa-heart text-accent">&nbsp;{{'save'|translate}}</span>
+                                        </div>
+                                        <div class="col-md-2">
+                                            {{candidate.availability}}
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <dir-pagination-controls></dir-pagination-controls>
+                            </div>
+                        </div>
+                        <div class="tab-pane animated fadeIn text-muted " id="candidatesMap">
+                            <div ng-controller="ChartCtrl" class="m-t-md">
+                                <div class="m-b-lg" style="height:240px;" ui-jp="vectorMap" ui-options="{
+                                  map: 'world_mill_en',
+                                  markers: {{world_markers}},
+                                  normalizeFunction: 'polynomial',
+                                  backgroundColor: 'transparent',
+                                  regionsSelectable: true,
+                                  markersSelectable: true,
+                                  regionStyle: {
+                                    initial: {
+                                      fill: '{{app.setting.color.primary}}'
+                                    },
+                                    hover: {
+                                      fill: '{{app.setting.color.accent}}',
+                                      stroke: '#fff'
+                                    },
+                                  },
+                                  markerStyle: {
+                                    initial: {
+                                      fill: '{{app.color.info}}',
+                                      stroke: '#fff'
+                                    },
+                                    hover: {
+                                      fill: '{{app.color.primary}}',
+                                      stroke: '#fff'
+                                    }
+                                  },
+                                  series: {
+                                    markers: [{
+                                      attribute: 'fill',
+                                      scale: ['{{app.color.primary}}','{{app.color.warning}}', '{{app.color.success}}'],
+                                      values: {{cityAreaData}}
+                                    },{
+                                      attribute: 'r',
+                                      scale: [5, 20],
+                                      values: {{cityAreaData}}
+                                    }]
+                                  }
+                                }">
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-pull-9 col-md-3 fix">
+            <div class="box">
+                <div class="box-header">{{"candidates"|translate}}</div>
+                <div class="box-body">
+                    <p><label class="md-switch">
+                        <input ng-model="caCt.onlyMy" ng-change="caCt.getMyCandidates()" type="checkbox">
+                        <i class="info"></i>
+                        <b class="text-accent text-lg ">{{"mycandidates"|translate}}</b>
+                    </label></p>
+                    <div class="nav-active-accent">
+                        <ul class="nav nav-tabs m-t">
+                            <li class="nav-item">
+                                <a class="nav-link active" href data-toggle="tab" data-target="#myPosition">{{'bypositions'|translate}}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href data-toggle="tab" data-target="#candidateSearch">{{'search'|translate}}</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="tab-content p-a m-b-md">
+                        <div class="tab-pane animated fadeIn active text-muted" id="myPosition">
+                            <div class="box">
+                                <div class="box-header">
+                                    {{'myposiitons'|translate}}
+                                </div>
+                                <div class="box-body">
+                                    <div class="list-group">
+                                        <a class="list-group-item" ng-click="caCt.getCandidatesByPosition(position._id)" ng-repeat="position in caCt.myPositions">
+                                            <div class="list-body">
+                                                <b>{{position.title}}</b>
+                                                <small>{{position.salary.min}}-{{position.salary.max}}k</small>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        {{search}}
+                        <div class="tab-pane animated fadeIn text-muted" id="candidateSearch">
+                            <b class="">{{"search candidates"|translate}}</b>
+                            <form name="caCt.searchForm" class="p-x-xs" ng-submit="caCt.searchForm.$valid &&caCt.searchCandidates()">
+                                <div class="m-b-lg">
+                                    <div class=" row-sm">
+
+                                        <div class="col-sm-12">
+                                            {{caCt.search.skills}}
+                                            <div class="md-form-group ">
+                                                <!--<input class="md-input" ng-model="caCt.search.skills" >-->
+                                                <ui-select multiple ng-model="caCt.search.skills" theme="bootstrap" class="md-input" >
+                                                    <ui-select-match placeholder="{{'put in skills'|translate}}">
+                                                        <span class="label label-info">{{$item}}</span>
+                                                    </ui-select-match>
+                                                    <ui-select-choices repeat="thisItem in listOfItems ">
+                                                        {{thisItem}}
+                                                    </ui-select-choices>
+                                                </ui-select>
+                                                <label>{{'skills'|translate}}</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="md-form-group ">
+                                                <input class="md-input" ng-model="caCt.search.city" >
+                                                <label>City</label>
+                                            </div>
+                                        </div>
+                                        <div class="text-center">
+                                            <button class="btn btn-outline b-primary text-primary">{{"search"|translate}}&nbsp;<i class="fa fa-search"></i> </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
